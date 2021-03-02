@@ -1,0 +1,17 @@
+Python Regular Expression Quick Guide
+
+^        Starts with
+$        Ends with 
+.        Any character (except newline character)
+\        Signals a special sequence (can also be used to escape special characters)
+\s       Whitespace
+\S       Non-whitespace character
+*        Repeats a character zero or more times (non-greedy: *?)
++        Repeats a character one or more times (non-greedy: +?)
+[]       A set of characters 
+[aeiou]  Matches a single character in the listed set
+[^XYZ]   Matches a single character not in the listed set
+[a-z0-9] The set of characters can include a range
+{2}      Exactly the specified number of occurances, al{2}
+|        Either or
+()       Capture and group, where regex extraction starts/ends
