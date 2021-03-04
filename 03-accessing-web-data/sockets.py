@@ -15,7 +15,7 @@ import socket
 mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 mysock.connect(('data.pr4e.org', 80))
 cmd = 'GET http://data.pr4e.org/intro-short.txt HTTP/1.0\r\n\r\n'.encode()
-# there are strings in python that are unicode, convert to UTF8 with .encode()
+# Strings are stored internally in Python3 as Unicode. Convert to UTF-8 with .encode()
 mysock.send(cmd)
 
 while True:
