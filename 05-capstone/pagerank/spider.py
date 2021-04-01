@@ -75,12 +75,12 @@ while True:
     cur.execute('DELETE from Links WHERE from_id=?', (fromid, ) )
     try:
         document = urlopen(url, context=ctx)
-
+        # using Beautiful Soup to decode, compensates for UTF-8
         html = document.read()
         if document.getcode() != 200 :
             print("Error on page: ",document.getcode())
             cur.execute('UPDATE Pages SET error=? WHERE url=?', (document.getcode(), url) )
-
+        # only looking for urls, no jpg, etc.
         if 'text/html' != document.info().get_content_type() :
             print("Ignore non text/html page")
             cur.execute('DELETE FROM Pages WHERE url=?', ( url, ) )
@@ -99,7 +99,7 @@ while True:
         cur.execute('UPDATE Pages SET error=-1 WHERE url=?', (url, ) )
         conn.commit()
         continue
-
+    # URL retrieved at this point
     cur.execute('INSERT OR IGNORE INTO Pages (url, html, new_rank) VALUES ( ?, NULL, 1.0 )', ( url, ) )
     cur.execute('UPDATE Pages SET html=? WHERE url=?', (memoryview(html), url ) )
     conn.commit()
